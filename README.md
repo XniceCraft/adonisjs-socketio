@@ -10,11 +10,11 @@ This package is highly experimental. Not recommended for production usage. Feel 
 
 - Install this package
   ```sh
-  npm install git+https://github.com/xnicecraft/adonisjs-socketio.git
+  npm install https://github.com/xnicecraft/adonisjs-socketio#<version from release>
   ```
 - Configure the package
   ```sh
-  node ace configure "@xnicecraft/adonisjs-socketio"
+  node ace configure @xnicecraft/adonisjs-socketio
   ```
 - And file start/websocket.ts and config/websocket.ts will be created
 
