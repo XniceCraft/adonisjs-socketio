@@ -1,0 +1,6 @@
+{{{ exports({ to: app.startPath('websocket.ts') }) }}}
+import websocket from '@xnicecraft/adonisjs-socketio/services/main'
+
+websocket.onConnected(({ socket }) => {
+  
+})
