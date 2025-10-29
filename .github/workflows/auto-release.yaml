@@ -64,7 +64,7 @@ jobs:
           git checkout -b release
           
           # Add built files
-          git add -f dist/
+          git add -f build/
           
           # Commit built files
           git commit -m "build: release v${{ steps.package_version.outputs.version }}"
