@@ -5,7 +5,7 @@ import InitializeSocketContext from './middleware/initialize_socket_context.js'
 
 import type { WebSocketConfig, WebSocketContext } from '../src/types.js'
 
-type WebSocketCallback = (ctx: WebSocketContext) => void
+type WebSocketCallback = (ctx: WebSocketContext) => Promise<void>
 
 export class WebSocketInterface {
   private _server: Server | null = null
@@ -54,27 +54,27 @@ export class WebSocketInterface {
       logger.error('WebSocket middleware setup failed:', err)
     }
 
-    this._server.on('connection', (socket) => {
+    this._server.on('connection', async (socket) => {
       if (!socket.context) {
         logger.error('Socket context not initialized')
         return
       }
 
       if (this._callback.connected) {
-        this._callback.connected({
+        await this._callback.connected({
           socket: socket,
           io: this._server!,
           ...socket.context,
         })
       }
 
-      socket.once('disconnect', () => {
+      socket.once('disconnect', async () => {
         if (!socket.context) {
           return
         }
 
         if (this._callback.disconnected) {
-          this._callback.disconnected({
+          await this._callback.disconnected({
             socket: socket,
             io: this._server!,
             ...socket.context,
