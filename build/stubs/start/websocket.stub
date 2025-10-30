@@ -1,0 +1,9 @@
+{{{ exports({ to: app.startPath('websocket.ts') }) }}}
+import websocket from '@xnicecraft/adonisjs-socketio/services/main'
+import type { WebSocketContext } from '@xnicecraft/adonisjs-socketio/types'
+
+websocket.addCallback('connected', ({ socket, io, auth } : WebSocketContext) {
+})
+
+websocket.addCallback('disconnected', ({ socket, io, auth } : WebSocketContext) {
+})

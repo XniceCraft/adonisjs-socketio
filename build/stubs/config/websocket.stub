@@ -1,0 +1,16 @@
+{{{ exports({ to: app.configPath('websocket.ts') }) }}}
+import { defineConfig } from '@xnicecraft/adonisjs-socketio'
+
+const websocketConfig = defineConfig({
+  middleware: [
+    () => import('#middleware/container_bindings_middleware'),
+    () => import('@adonisjs/auth/initialize_auth_middleware'),
+  ],
+  socketOptions: {
+    cors: {
+      origin: '*',
+    },
+  },
+})
+
+export default websocketConfig
