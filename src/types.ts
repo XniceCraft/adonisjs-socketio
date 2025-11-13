@@ -20,6 +20,15 @@ export type WebSocketContext = {
 
 export type WebSocketCallback = (ctx: WebSocketContext) => Promise<void>
 
+export type GetControllerHandlers<Controller extends Constructor<any>> = {
+  [K in keyof InstanceType<Controller>]: InstanceType<Controller>[K] extends (
+    ctx: WebSocketContext,
+    ...args: any[]
+  ) => any
+    ? K
+    : never
+}[keyof InstanceType<Controller>]
+
 export type SocketIoMiddleware = Parameters<Server['use']>[0]
 
 export type StoreWebSocketRouteHandler =

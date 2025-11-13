@@ -11,9 +11,9 @@ import { WebSocketRoute } from './route.js'
 import { WebSocketRouteGroup } from './group.js'
 import InitializeSocketContext from './middleware/initialize_socket_context.js'
 
-import type { WebSocketCallback, WebSocketConfig } from '../src/types.js'
+import type { WebSocketCallback, WebSocketConfig, GetControllerHandlers } from '../src/types.js'
 import type { Application } from '@adonisjs/core/app'
-import type { Constructor, GetControllerHandlers, LazyImport } from '@adonisjs/core/types/http'
+import type { Constructor, LazyImport } from '@adonisjs/core/types/http'
 
 /**
  * WebSocketInterface manages Socket.IO server integration with AdonisJS.

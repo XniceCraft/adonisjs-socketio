@@ -5,14 +5,15 @@
  * file that was distributed with this source code.
  */
 
-import { moduleCaller, moduleExpression, moduleImporter } from '@adonisjs/core/container'
+import { moduleCaller, moduleImporter } from '@adonisjs/core/container'
 import Macroable from '@poppinss/macroable'
 import is from '@sindresorhus/is'
 
-import type { Constructor, GetControllerHandlers, LazyImport } from '@adonisjs/core/types/http'
+import type { Constructor, LazyImport } from '@adonisjs/core/types/http'
 import type { WebSocketCallback, StoreWebSocketRouteHandler, WebSocketContext } from './types.js'
 import type { ApplicationService } from '@adonisjs/core/types'
 import type { Application } from '@adonisjs/core/app'
+import type { GetControllerHandlers } from './types.js'
 
 /**
  * WebSocketRoute represents a single WebSocket event handler.
@@ -100,9 +101,13 @@ export class WebSocketRoute<Controller extends Constructor<any> = any> extends M
      * Example: '#controllers/chat_controller.send'
      */
     if (typeof handler === 'string') {
+      const parts = handler.split('.')
+      const method = parts.length === 1 ? 'handle' : parts.pop()!
+      const moduleRefId = parts.join('.')
+
       return {
         reference: handler,
-        ...moduleExpression(handler, import.meta.url).toHandleMethod(),
+        ...moduleImporter(() => this.#app.import(moduleRefId), method).toHandleMethod(),
       } satisfies StoreWebSocketRouteHandler
     }
 
