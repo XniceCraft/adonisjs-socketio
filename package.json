@@ -1,7 +1,7 @@
 {
   "name": "@xnicecraft/adonisjs-socketio",
   "description": "Socket.io provider for AdonisJS",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "node": ">=20.6.0"
   },
@@ -88,6 +88,8 @@
   },
   "prettier": "@adonisjs/prettier-config",
   "dependencies": {
+    "@poppinss/macroable": "^1.1.0",
+    "@sindresorhus/is": "^7.1.1",
     "socket.io": "^4.8.1"
   }
 }

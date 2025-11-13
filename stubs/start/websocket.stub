@@ -2,8 +2,14 @@
 import websocket from '@xnicecraft/adonisjs-socketio/services/main'
 import type { WebSocketContext } from '@xnicecraft/adonisjs-socketio/types'
 
-websocket.addCallback('connected', ({ socket, io, auth } : WebSocketContext) {
+websocket.on('connection', ({ socket, io, auth } : WebSocketContext) => {
 })
 
-websocket.addCallback('disconnected', ({ socket, io, auth } : WebSocketContext) {
+websocket.on('message', ({ socket, params } : WebSocketContext) => {
+    console.log(params.message)
+
+    socket.emit('message', params.message)
+}, ['message'])
+
+websocket.on('disconnect', ({ socket, io, auth } : WebSocketContext) => {
 })

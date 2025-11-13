@@ -15,10 +15,14 @@ export default class WebSocketProvider {
     this.app.container.singleton('websocket', () => {
       const config = this.app.config.get<WebSocketConfig>('websocket', {
         middleware: [],
-        socketOptions: {},
+        socketOptions: {
+          cors: {
+            origin: '*',
+          },
+        },
       })
 
-      return new WebSocketInterface(config)
+      return new WebSocketInterface(this.app, config)
     })
   }
 
